@@ -4,11 +4,11 @@ from sdl2 import (SDL_KEYDOWN, SDL_QUIT, SDLK_0, SDLK_1, SDLK_2,
                   SDLK_ESCAPE)
 
 
-image = None
-selected_item = None
 ITEM_NONE = 0
 ITEM_SMALL_BALL = 1
 ITEM_LARGE_BALL = 2
+image = None
+selected_item = ITEM_SMALL_BALL
 ITEM_KEYS = {
     SDLK_0: ITEM_NONE,
     SDLK_1: ITEM_SMALL_BALL,
@@ -33,14 +33,12 @@ def handle_events():
             game_framework.quit()
             return
         if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            import title_mode
-            game_framework.change_mode(title_mode)
+            game_framework.pop_mode()
             return
         if event.type == SDL_KEYDOWN:
             if event.key in ITEM_KEYS:
                 selected_item = ITEM_KEYS[event.key]
-                import play_mode
-                game_framework.change_mode(play_mode)
+                game_framework.pop_mode()
                 return
 
 

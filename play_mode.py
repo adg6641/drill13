@@ -6,6 +6,7 @@ import title_mode
 import item_select_mode
 from boy import Boy
 from grass import Grass
+from sdl2 import SDLK_e
 
 boy = None
 BALL_SIZES = {
@@ -22,6 +23,9 @@ def handle_events():
             return
         elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
             game_framework.push_mode(pause_mode)
+            return
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_e:
+            game_framework.push_mode(item_select_mode)
             return
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_mode(title_mode)
@@ -53,7 +57,15 @@ def pause():
 
 
 def resume():
-    pass
+    if boy is not None:
+        try:
+            boy.ball_size = BALL_SIZES[item_select_mode.selected_item]
+        except KeyError as error:
+            raise ValueError(
+                'Unknown item selection: {}'.format(
+                    item_select_mode.selected_item
+                )
+            ) from error
 
 
 
