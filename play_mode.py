@@ -3,6 +3,7 @@ import game_framework
 import game_world
 import pause_mode
 import title_mode
+import item_select_mode
 from boy import Boy
 from grass import Grass
 
@@ -26,7 +27,10 @@ def handle_events():
 
 def init():
     global boy
-    boy = Boy()
+    ball_size = None
+    if item_select_mode.selected_item != item_select_mode.ITEM_NONE:
+        ball_size = 21
+    boy = Boy(ball_size)
     game_world.add_oject(boy)
 
     grass = Grass()
