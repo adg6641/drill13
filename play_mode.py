@@ -8,6 +8,11 @@ from boy import Boy
 from grass import Grass
 
 boy = None
+BALL_SIZES = {
+    item_select_mode.ITEM_NONE: None,
+    item_select_mode.ITEM_SMALL_BALL: 21,
+    item_select_mode.ITEM_LARGE_BALL: 41,
+}
 
 def handle_events():
     event_list = get_events()
@@ -27,9 +32,12 @@ def handle_events():
 
 def init():
     global boy
-    ball_size = None
-    if item_select_mode.selected_item == item_select_mode.ITEM_SMALL_BALL:
-        ball_size = 21
+    try:
+        ball_size = BALL_SIZES[item_select_mode.selected_item]
+    except KeyError as error:
+        raise ValueError(
+            'Unknown item selection: {}'.format(item_select_mode.selected_item)
+        ) from error
     boy = Boy(ball_size)
     game_world.add_oject(boy)
 
