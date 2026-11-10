@@ -39,6 +39,9 @@ def handle_events():
         if event.type == SDL_KEYDOWN:
             if event.key in ITEM_KEYS:
                 selected_item = ITEM_KEYS[event.key]
+                import play_mode
+                game_framework.change_mode(play_mode)
+                return
 
 
 def update():
