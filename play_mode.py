@@ -28,7 +28,7 @@ def handle_events():
 def init():
     global boy
     ball_size = None
-    if item_select_mode.selected_item != item_select_mode.ITEM_NONE:
+    if item_select_mode.selected_item == item_select_mode.ITEM_SMALL_BALL:
         ball_size = 21
     boy = Boy(ball_size)
     game_world.add_oject(boy)
