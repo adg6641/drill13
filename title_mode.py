@@ -1,5 +1,5 @@
 import game_framework
-import play_mode
+import item_select_mode
 from pico2d import *
 
 image = None
@@ -25,7 +25,7 @@ def handle_events():
                 game_framework.quit()
                 return
             if event.key == SDLK_SPACE:
-                game_framework.change_mode(play_mode)
+                game_framework.change_mode(item_select_mode)
                 return
 
 
